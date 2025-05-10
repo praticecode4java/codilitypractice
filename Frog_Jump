@@ -1,0 +1,8 @@
+public class FrogJump {
+    public static int solution(int X, int Y, int D) {
+        // Calculate the distance to cover
+        int distance = Y - X;
+        
+        // Compute the minimum number of jumps
+        return (distance + D - 1) / D;
+    }
