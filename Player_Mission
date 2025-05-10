@@ -1,0 +1,19 @@
+class Solution {
+    public int solution(int[] D, int X) {
+        int days = 0;
+        int i = 0;
+        int N = D.length;
+
+        while (i < N) {
+            int start = D[i];
+            days++;
+
+            // Complete missions for the day
+            while (i < N && D[i] - start <= X) {
+                i++;
+            }
+        }
+
+        return days;
+    }
+}
