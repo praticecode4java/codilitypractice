@@ -1,0 +1,22 @@
+public class CasinoGambler {
+    public static int solution(int N, int K) {
+        int rounds = 0;
+        int allInCount = 0;
+
+        while (N > 1) {
+            if (N % 2 == 0) {
+                // N is even, could have been doubled
+                if (allInCount < K) {
+                    allInCount++;
+                }
+            } else {
+                // N is odd, must have added 1
+                N--;
+            }
+            N /= 2;
+            rounds++;
+        }
+
+        // Add the initial round
+        return rounds + 1;
+    }
