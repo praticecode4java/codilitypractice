@@ -1,0 +1,31 @@
+class Solution {
+    public int solution(int[] D, int[] C, int P) {
+        int N = D.length;
+        int ordersFulfilled = 0;
+
+        // Step 1: Pair distances with monitor quantities
+        List<int[]> orders = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            orders.add(new int[]{D[i], C[i]});
+        }
+
+        // Step 2: Sort orders by distance
+        orders.sort(Comparator.comparingInt(o -> o[0]));
+
+        // Step 3: Fulfill orders
+        for (int[] order : orders) {
+            int monitors = order[1];
+            if (P >= monitors) {
+                P -= monitors;
+                ordersFulfilled++;
+            } else {
+                P = 0;
+                ordersFulfilled++;
+                break;
+            }
+        }
+
+        // Step 4: Return result
+        return ordersFulfilled;
+    }
+}
