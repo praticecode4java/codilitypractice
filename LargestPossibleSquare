@@ -1,0 +1,27 @@
+public class Solution {
+    
+    // Helper function to check if we can cut 4 pieces of length 'side' from sticks A and B
+    public static boolean canCut(int side, int A, int B) {
+        return (A / side) + (B / side) >= 4;
+    }
+
+    // Main function to find the largest square side
+    public static int square(int A, int B) {
+        // Perform binary search on the side length from 1 to min(A, B)
+        int left = 1, right = Math.min(A, B);
+        int result = 0;
+
+        while (left <= right) {
+            int mid = (left + right) / 2;
+
+            // Check if it's possible to cut 4 pieces of length 'mid'
+            if (canCut(mid, A, B)) {
+                result = mid;  // Mid is a valid side length, try to find larger one
+                left = mid + 1;
+            } else {
+                right = mid - 1;  // Try smaller side lengths
+            }
+        }
+
+        return result;
+    }
