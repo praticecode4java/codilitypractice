@@ -1,0 +1,24 @@
+public class RobotPath {
+    public static boolean isRectanglePath(String moves) {
+        int x = 0, y = 0;
+        int up = 0, down = 0, left = 0, right = 0;
+
+        for (char move : moves.toCharArray()) {
+            switch (move) {
+                case '^': y++; up++; break;
+                case 'v': y--; down++; break;
+                case '<': x--; left++; break;
+                case '>': x++; right++; break;
+                default: return false; // Invalid move
+            }
+        }
+
+        // Check if movements are balanced and robot returns to origin
+        return (up == down && left == right && x == 0 && y == 0);
+    }
+
+    public static void main(String[] args) {
+        String path = "^>v<";
+        System.out.println(isRectanglePath(path)); // Output: true
+    }
+}
