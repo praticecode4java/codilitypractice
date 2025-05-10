@@ -1,0 +1,18 @@
+class Solution {
+    public int solution(int X, int[] A) {
+        boolean[] positions = new boolean[X + 1];
+        int covered = 0;
+
+        for (int time = 0; time < A.length; time++) {
+            int pos = A[time];
+            if (pos <= X && !positions[pos]) {
+                positions[pos] = true;
+                covered++;
+            }
+            if (covered == X) {
+                return time;
+            }
+        }
+        return -1;
+    }
+}
