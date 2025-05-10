@@ -1,0 +1,12 @@
+public class FrogRiverOne {
+    public int solution(int X, int[] A) {
+        Set<Integer> positions = new HashSet<>();
+        for (int time = 0; time < A.length; time++) {
+            positions.add(A[time]);
+            if (positions.size() == X) {
+                return time;
+            }
+        }
+        return -1;
+    }
+}
