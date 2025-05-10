@@ -1,0 +1,35 @@
+public class CarAllocation {
+    public static int minCarsRequired(int[] P, int[] S) {
+        // Sort groups and cars in descending order
+        Arrays.sort(P);
+        Arrays.sort(S);
+        int carsUsed = 0;
+        int carIndex = 0;
+
+        // Iterate over each group
+        for (int i = P.length - 1; i >= 0; i--) {
+            // Find the first available car that can accommodate the group
+            while (carIndex < S.length && S[carIndex] < P[i]) {
+                carIndex++;
+            }
+            if (carIndex < S.length) {
+                // Assign group to car
+                S[carIndex] -= P[i];
+                if (S[carIndex] == 0) {
+                    carIndex++;
+                }
+            } else {
+                // No suitable car, allocate a new one
+                carsUsed++;
+                S = Arrays.copyOf(S, S.length + 1);
+                S[S.length - 1] = 100; // Assuming a new car with 100 seats
+                Arrays.sort(S);
+                carIndex = 0;
+                S[carIndex] -= P[i];
+                if (S[carIndex] == 0) {
+                    carIndex++;
+                }
+            }
+        }
+        return carsUsed;
+    }
