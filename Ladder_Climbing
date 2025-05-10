@@ -1,0 +1,23 @@
+public class Solution {
+    public static int[] solution(int[] A, int[] B) {
+        // Step 1: Remove duplicates from A to get unique scores
+        Set<Integer> uniqueScores = new LinkedHashSet<>();
+        for (int score : A) {
+            uniqueScores.add(score);
+        }
+        List<Integer> ranked = new ArrayList<>(uniqueScores);
+        
+        // Step 2: Prepare an array to store Alice's ranks
+        int[] ranks = new int[B.length];
+        int index = ranked.size() - 1;
+        
+        // Step 3: Determine Alice's rank after each score
+        for (int i = 0; i < B.length; i++) {
+            while (index >= 0 && B[i] >= ranked.get(index)) {
+                index--;
+            }
+            ranks[i] = index + 2; // Add 2 to get the correct rank (index + 1 for 1-based rank)
+        }
+        
+        return ranks;
+    }
