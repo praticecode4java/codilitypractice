@@ -1,16 +1,20 @@
 class Solution {
     public int solution(int[] D, int X) {
-        int days = 0;
-        int i = 0;
-        int N = D.length;
+        int days = 1; // Start with the first mission
+        int maxDifficulty = D[0]; // Initialize the maximum difficulty for the current day
+        int minDifficulty = D[0]; // Initialize the minimum difficulty for the current day
 
-        while (i < N) {
-            int start = D[i];
-            days++;
+        // Iterate through the missions starting from the second one
+        for (int i = 1; i < D.length; i++) {
+            // Update the maximum and minimum difficulty for the current day
+            maxDifficulty = Math.max(maxDifficulty, D[i]);
+            minDifficulty = Math.min(minDifficulty, D[i]);
 
-            // Complete missions for the day
-            while (i < N && D[i] - start <= X) {
-                i++;
+            // If the difference exceeds X, we need a new day
+            if (maxDifficulty - minDifficulty > X) {
+                days++; // Increment the day count
+                maxDifficulty = D[i]; // Reset max for the new day
+                minDifficulty = D[i]; // Reset min for the new day
             }
         }
 
