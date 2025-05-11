@@ -1,0 +1,58 @@
+public int[] solution(char[][] board) {
+        int rows = board.length;
+        int cols = board[0].length;
+        boolean[][] visited = new boolean[rows][cols];
+        int destroyers = 0, submarines = 0, patrolBoats = 0;
+
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                if (board[r][c] == '#' && !visited[r][c]) {
+                    int size = exploreShip(board, visited, r, c);
+                    if (size == 3) {
+                        destroyers++;
+                    } else if (size == 2) {
+                        patrolBoats++;
+                    }
+                }
+            }
+        }
+
+        return new int[]{destroyers, submarines, patrolBoats};
+    }
+
+    private int exploreShip(char[][] board, boolean[][] visited, int r, int c) {
+        int size = 0;
+        int rows = board.length;
+        int cols = board[0].length;
+
+        // Check horizontal
+        if (c + 1 < cols && board[r][c + 1] == '#') {
+            size++;
+            visited[r][c] = true;
+            while (c + size < cols && board[r][c + size] == '#') {
+                visited[r][c + size] = true;
+                size++;
+            }
+        }
+
+        // Check vertical
+        if (r + 1 < rows && board[r + 1][c] == '#') {
+            size++;
+            visited[r][c] = true;
+            while (r + size < rows && board[r + size][c] == '#') {
+                visited[r + size][c] = true;
+                size++;
+            }
+        }
+
+        // Check "L" shape
+        if (r + 1 < rows && c + 1 < cols && board[r + 1][c] == '#' && board[r][c + 1] == '#') {
+            size = 3;
+            visited[r][c] = true;
+            visited[r + 1][c] = true;
+            visited[r][c + 1] = true;
+        }
+
+        return size;
+    }
+}
