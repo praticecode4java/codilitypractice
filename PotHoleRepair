@@ -1,0 +1,13 @@
+   public static int solution(String S) {
+        int patchesCount = 0;
+        int i = 0;
+        while (i < S.length()) {
+            if (S.charAt(i) == 'x') {
+                patchesCount++;
+                i += 3; // Skip the next two segments as they are patched
+            } else {
+                i++;
+            }
+        }
+        return patchesCount;
+    }
