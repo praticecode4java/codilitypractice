@@ -1,0 +1,35 @@
+class Solution {
+    public int solution(int[] A) {
+        int N = A.length;
+        if (N < 2) return 0; // Not enough elements to form a pair
+
+        // Step 1: Calculate pair sums
+        int[] pairSums = new int[N - 1];
+        for (int i = 0; i < N - 1; i++) {
+            pairSums[i] = A[i] + A[i + 1];
+        }
+
+        // Step 2: Initialize DP arrays
+        int[] dp1 = new int[N];
+        int[] dp2 = new int[N];
+        int[] dp3 = new int[N];
+
+        dp1[1] = pairSums[0];
+        dp2[2] = pairSums[0] + pairSums[1];
+        dp3[3] = pairSums[0] + pairSums[1] + pairSums[2];
+
+        // Step 3: Fill DP arrays
+        for (int i = 2; i < N - 1; i++) {
+            dp1[i] = Math.max(dp1[i - 1], pairSums[i - 1]);
+            if (i > 2) {
+                dp2[i] = Math.max(dp2[i - 1], dp1[i - 2] + pairSums[i - 1]);
+            }
+            if (i > 3) {
+                dp3[i] = Math.max(dp3[i - 1], dp2[i - 2] + pairSums[i - 1]);
+            }
+        }
+
+        // Step 4: Return the maximum value
+        return Math.max(dp3[N - 2], Math.max(dp2[N - 2], dp1[N - 2]));
+    }
+}
