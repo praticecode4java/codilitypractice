@@ -1,0 +1,22 @@
+public class BananaRemoval {
+    public static int solution(String s) {
+        int bCount = 0, aCount = 0, nCount = 0;
+
+        // Count occurrences of 'B', 'A', and 'N'
+        for (char c : s.toCharArray()) {
+            if (c == 'B') bCount++;
+            else if (c == 'A') aCount++;
+            else if (c == 'N') nCount++;
+        }
+
+        // Calculate the maximum number of "BANANA" we can remove
+        int maxBananas = Math.min(bCount, Math.min(aCount / 3, nCount / 2));
+        return maxBananas;
+    }
+
+    public static void main(String[] args) {
+        // Test cases
+        System.out.println(solution("NAABXXAN")); // Output: 1
+        System.out.println(solution("NAANAAXNABABYNNBZ")); // Output: 2
+    }
+}
