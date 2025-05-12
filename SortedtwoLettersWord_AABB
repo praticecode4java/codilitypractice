@@ -1,0 +1,26 @@
+public class BananaRemoval {
+    public static int solution(String s) {
+        int n = s.length();
+        int[] dp = new int[n + 1];
+
+        // Initialize dp array
+        dp[0] = 0;
+
+        // Fill the dp table
+        for (int i = 1; i <= n; i++) {
+            if (s.charAt(i - 1) == 'A') {
+                dp[i] = Math.min(dp[i - 1], i);
+            } else { // s.charAt(i - 1) == 'B'
+                dp[i] = Math.min(dp[i - 1] + 1, i);
+            }
+        }
+
+        return dp[n];
+    }
+
+    public static void main(String[] args) {
+        // Test cases
+        System.out.println(solution("NAABXXAN")); // Output: 1
+        System.out.println(solution("NAANAAXNABABYNNBZ")); // Output: 2
+    }
+}
