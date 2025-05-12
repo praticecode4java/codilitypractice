@@ -1,0 +1,21 @@
+class Solution {
+    public int solution(String s) {
+        Set<Character> seen = new HashSet<>();
+        int substringCount = 0;
+
+        for (char c : s.toCharArray()) {
+            if (seen.contains(c)) {
+                substringCount++;
+                seen.clear();
+            }
+            seen.add(c);
+        }
+
+        // Account for the last substring
+        if (!seen.isEmpty()) {
+            substringCount++;
+        }
+
+        return substringCount;
+    }
+}
