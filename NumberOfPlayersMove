@@ -1,0 +1,33 @@
+class Solution {
+    public int solution(String S) {
+        Set<Integer> occupied = new HashSet<>();
+        int successfulMoves = 0;
+
+        for (int i = 0; i < S.length(); i++) {
+            int target = -1;
+            char move = S.charAt(i);
+
+            switch (move) {
+                case '<':
+                    target = i - 1;
+                    break;
+                case '>':
+                    target = i + 1;
+                    break;
+                case '^':
+                    target = i - 10; // Assuming a 10x10 grid
+                    break;
+                case 'v':
+                    target = i + 10; // Assuming a 10x10 grid
+                    break;
+            }
+
+            if (target >= 0 && !occupied.contains(target)) {
+                successfulMoves++;
+                occupied.add(target);
+            }
+        }
+
+        return successfulMoves;
+    }
+}
