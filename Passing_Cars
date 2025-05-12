@@ -1,0 +1,19 @@
+class Solution {
+    public int solution(int[] A) {
+        long eastCount = 0;
+        long passingCars = 0;
+
+        for (int car : A) {
+            if (car == 0) {
+                eastCount++;
+            } else {
+                passingCars += eastCount;
+                if (passingCars > 1_000_000_000) {
+                    return -1;
+                }
+            }
+        }
+
+        return (int) passingCars;
+    }
+}
